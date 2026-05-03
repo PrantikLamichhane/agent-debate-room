@@ -2,11 +2,11 @@
 
 1/
 
-I built a tiny open-source protocol for Claude Code/Codex agents:
+I built a tiny open-source scaffold for Claude Code/Codex agents:
 
 Agent Debate Room.
 
-Before an agent ships important work, it has to stress-test its own answer through a second model engine.
+Before an agent ships important work, its prompt tells it to stress-test its own answer through a second model engine.
 
 2/
 
@@ -59,6 +59,6 @@ For material decisions, debate first.
 
 I put the templates and setup protocol on GitHub:
 
-[repo link]
+https://github.com/PrantikLamichhane/agent-debate-room
 
 If you use persistent Claude Code/Codex agents, you can adapt it in a few minutes.

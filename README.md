@@ -1,19 +1,29 @@
 # Agent Debate Room
 
-Add cross-model debate to your Claude Code agents before they finalize important work.
+Scaffold cross-model debate rooms for Claude Code and Codex agents before they finalize important work.
 
-This repo gives you a lightweight protocol for creating the same agent identity on two model engines, usually Claude and GPT, with shared memory and a debate room. The goal is simple: make important agent decisions pass through structured disagreement before they reach you.
+This repo gives you a lightweight protocol and setup script for creating the same agent identity on two model engines, usually Claude and GPT, with shared memory and a debate room. The goal is simple: make important agent decisions pass through structured disagreement before they reach you.
 
 It is not a new agent framework. It is a set of files, prompts, and conventions you can give to Claude Code or Codex so your agents can stress-test their own work.
 
 ## What It Does
 
-- Creates one agent identity across two model runtimes.
-- Adds shared checkpoint and log files so both runtimes keep continuity.
+- Scaffolds one agent identity across two model runtimes.
+- Adds shared checkpoint and log templates so both runtimes can keep continuity.
 - Defines bus identities such as `agent-gpt` and `agent-claude` as routing labels, not separate personalities.
-- Adds automatic checkpoint triggers before modelshifting and after important decisions.
-- Requires major non-urgent work to be debated before delivery.
+- Adds prompt-level checkpoint rules before modelshifting and after important decisions.
+- Adds prompt-level debate rules for major non-urgent work before delivery.
 - Gives each agent a clear rule for when to stop debating and when to name an unresolved disagreement.
+
+## What It Does Not Do Yet
+
+- It does not install Claude Code or Codex for you.
+- It does not create your shell launchers automatically.
+- It does not provide a built-in message bus.
+- It does not convert every existing agent in one command.
+- It does not guarantee better answers.
+
+This is a tested scaffold and protocol. You still wire it into your own local agent workflow.
 
 ## Why This Exists
 
@@ -56,9 +66,9 @@ Mira modelshifted from Claude to GPT for a second reasoning pass.
 
 Because live chat context does not automatically move between model engines, modelshifting needs a checkpoint first.
 
-## Automatic Checkpointing
+## Checkpointing Rule
 
-An agent should automatically checkpoint when:
+The generated runtime prompts tell the agent to checkpoint when:
 
 - the user makes an important decision
 - the user changes the goal, offer, scope, or product truth
@@ -76,7 +86,7 @@ The checkpoint should capture:
 - open risks or disagreements
 - next action
 
-Without this, the next model engine will not remember the live conversation.
+Without this, the next model engine will not remember the live conversation. Whether this happens automatically depends on your agent runtime following the generated instructions.
 
 ## When To Use It
 
@@ -121,7 +131,7 @@ Do not require debate for:
 
 ## Quick Start
 
-Clone this repo, then run:
+Clone this repo, then run this once per agent:
 
 ```bash
 ./scripts/init-agent-debate.sh mira "sales operator"
