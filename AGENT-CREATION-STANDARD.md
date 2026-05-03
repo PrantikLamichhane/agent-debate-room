@@ -55,6 +55,14 @@ Use bus routes like:
 
 These are routing labels only.
 
+## Modelshifting
+
+Modelshifting is the act of changing the model behind an agent without changing the agent's identity.
+
+The agent keeps its name, memory, role, goals, and operating rules. Only the reasoning engine changes.
+
+Before modelshifting, checkpoint the current live context. The next model engine cannot see unsaved chat history.
+
 ## Debate Trigger
 
 Debate is required before material non-urgent work such as:
@@ -73,6 +81,26 @@ Debate is optional for:
 - low-risk formatting
 - urgent messages where delay would hurt
 
+## Automatic Checkpoint Trigger
+
+The active runtime should checkpoint automatically when:
+
+- the user makes an important decision
+- the user changes the goal, offer, scope, or product truth
+- the agent is about to modelshift to another engine
+- the agent is about to request a debate/stress test
+- the agent reaches a debate verdict
+- the agent finishes material work
+
+The checkpoint should include:
+
+- current goal
+- current context truth
+- user decisions
+- work completed
+- open risks or disagreements
+- next action
+
 ## Debate Stop Rule
 
 Stop debating when:
@@ -84,7 +112,7 @@ Do not hide the disagreement.
 
 ## Memory Rule
 
-After material work:
+After material work or before modelshifting:
 
 1. Update the active runtime checkpoint.
 2. Append to the active runtime daily log if present.

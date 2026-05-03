@@ -10,6 +10,15 @@ Use this file when the two model engines need to debate a material non-urgent de
 
 -
 
+## Pre-Handoff Checkpoint
+
+- Current goal:
+- Current context truth:
+- Latest user decisions:
+- Work completed:
+- Open risks/disagreements:
+- Next action:
+
 ## Draft Recommendation
 
 -

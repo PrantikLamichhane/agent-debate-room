@@ -11,6 +11,7 @@ It is not a new agent framework. It is a set of files, prompts, and conventions 
 - Creates one agent identity across two model runtimes.
 - Adds shared checkpoint and log files so both runtimes keep continuity.
 - Defines bus identities such as `agent-gpt` and `agent-claude` as routing labels, not separate personalities.
+- Adds automatic checkpoint triggers before modelshifting and after important decisions.
 - Requires major non-urgent work to be debated before delivery.
 - Gives each agent a clear rule for when to stop debating and when to name an unresolved disagreement.
 
@@ -40,6 +41,42 @@ Example:
 - `mira-gpt` and `mira-claude`: bus routes for self-debate.
 
 The debate room is not peer review between two separate agents. It is one agent stress-testing its own thinking through a different model.
+
+## Modelshifting
+
+Modelshifting is changing the model behind an agent without changing the agent's identity.
+
+The agent keeps its name, memory, role, goals, and operating rules. Only the reasoning engine changes.
+
+Example:
+
+```text
+Mira modelshifted from Claude to GPT for a second reasoning pass.
+```
+
+Because live chat context does not automatically move between model engines, modelshifting needs a checkpoint first.
+
+## Automatic Checkpointing
+
+An agent should automatically checkpoint when:
+
+- the user makes an important decision
+- the user changes the goal, offer, scope, or product truth
+- the agent is about to modelshift to another engine
+- the agent is about to request a debate/stress test
+- the agent reaches a debate verdict
+- the agent finishes material work
+
+The checkpoint should capture:
+
+- current goal
+- current context truth
+- user decisions
+- work completed
+- open risks or disagreements
+- next action
+
+Without this, the next model engine will not remember the live conversation.
 
 ## When To Use It
 
@@ -114,12 +151,13 @@ If you already have an agent folder, copy the relevant sections from the templat
 For material non-urgent work:
 
 1. Draft the strongest recommendation locally.
-2. Send the other engine a stress-test request.
-3. Ask for risks, weak assumptions, missing evidence, overclaiming, and a stronger alternative.
-4. Read the reply.
-5. Accept the critique or push back with reasoning.
-6. Continue until both engines agree, or name the unresolved disagreement clearly.
-7. Save the verdict in the shared checkpoint/log.
+2. Save a checkpoint before handoff.
+3. Send the other engine a stress-test request.
+4. Ask for risks, weak assumptions, missing evidence, overclaiming, and a stronger alternative.
+5. Read the reply.
+6. Accept the critique or push back with reasoning.
+7. Continue until both engines agree, or name the unresolved disagreement clearly.
+8. Save the verdict in the shared checkpoint/log.
 
 ## Example Stress-Test Request
 

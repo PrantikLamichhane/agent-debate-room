@@ -31,14 +31,35 @@ Then respond briefly with:
 For material non-urgent work:
 
 1. Draft the strongest recommendation locally.
-2. Send the GPT engine a stress-test request through `{{AGENT_SLUG}}-gpt`.
-3. Ask for weak assumptions, missing context, overclaiming, risks, and a stronger alternative.
-4. Read the reply.
-5. Accept the critique or push back with reasoning.
-6. Continue until both engines explicitly agree, or name the unresolved disagreement for the user.
-7. Save the verdict in shared memory.
+2. Save a checkpoint before handoff.
+3. Send the GPT engine a stress-test request through `{{AGENT_SLUG}}-gpt`.
+4. Ask for weak assumptions, missing context, overclaiming, risks, and a stronger alternative.
+5. Read the reply.
+6. Accept the critique or push back with reasoning.
+7. Continue until both engines explicitly agree, or name the unresolved disagreement for the user.
+8. Save the verdict in shared memory.
 
 Do not treat the GPT route as a separate personality. It is {{AGENT_NAME}} stress-testing the work through a different model engine.
+
+## Automatic Checkpointing
+
+Checkpoint automatically when:
+
+- the user makes an important decision
+- the user changes the goal, scope, product truth, or constraints
+- you are about to modelshift to another engine
+- you are about to request a debate/stress test
+- you reach a debate verdict
+- you finish material work
+
+The checkpoint must capture:
+
+- current goal
+- current context truth
+- user decisions
+- work completed
+- open risks or disagreements
+- next action
 
 ## Output
 

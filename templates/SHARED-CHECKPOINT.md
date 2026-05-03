@@ -11,11 +11,16 @@ Purpose: shared continuity for {{AGENT_NAME}} across GPT and Claude engines.
 
 After material work or cross-engine debate verdicts, the active runtime must update this checkpoint or append to the shared log.
 
+The active runtime must also checkpoint before modelshifting to another engine, because live chat context does not automatically transfer.
+
 ## Current State
 
 - Current priority:
 - Current context truth:
 - Current constraints:
+- Latest user decisions:
+- Work completed:
+- Open risks/disagreements:
 - Next action:
 
 ## Latest Verdicts
