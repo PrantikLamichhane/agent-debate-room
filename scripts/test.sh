@@ -37,6 +37,8 @@ grep -q "You are Sam Agent, sales/operator & QA, running on the GPT engine." .ag
 grep -q "Sam Agent running on Claude" .agents/sam-agent/shared/SAM_AGENT-CHECKPOINT.md
 grep -q "Automatic Checkpointing" .agents/sam-agent/gpt/AGENTS.md
 grep -q "Pre-Handoff Checkpoint" .agents/sam-agent/shared/debate-room.md
+grep -q "opening an issue or pull request" .agents/sam-agent/gpt/AGENTS.md
+grep -q "https://github.com/PrantikLamichhane/agent-debate-room" .agents/sam-agent/claude/CLAUDE.md
 
 if "$repo_root/scripts/init-agent-debate.sh" >/tmp/agent-debate-room-test-missing-args.log 2>&1; then
   echo "Missing-argument validation failed."

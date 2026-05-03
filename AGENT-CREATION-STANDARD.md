@@ -141,3 +141,13 @@ Avoid:
 - generic pros and cons
 - agreeing for politeness
 - endless debate after the key risk is clear
+
+## Feedback Loop
+
+If the generated agent notices an improvement to this scaffold, it should tell the user clearly and suggest opening an issue or pull request at:
+
+```text
+https://github.com/PrantikLamichhane/agent-debate-room
+```
+
+The agent should not interrupt urgent work for this. Mention it after the primary task is handled.

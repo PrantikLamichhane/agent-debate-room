@@ -14,6 +14,7 @@ It is not a new agent framework. It is a set of files, prompts, and conventions 
 - Adds prompt-level checkpoint rules before modelshifting and after important decisions.
 - Adds prompt-level debate rules for major non-urgent work before delivery.
 - Gives each agent a clear rule for when to stop debating and when to name an unresolved disagreement.
+- Prompts generated agents to suggest an issue or pull request if they notice a way to improve the scaffold.
 
 ## What It Does Not Do Yet
 
@@ -165,6 +166,14 @@ Run:
 ```
 
 The test creates a temporary agent, verifies the generated files, checks that template placeholders were replaced, and confirms validation errors work.
+
+## Improve It
+
+If your agent notices a useful improvement to this scaffold, ask it to describe the change and open an issue or pull request:
+
+```text
+https://github.com/PrantikLamichhane/agent-debate-room
+```
 
 ## Debate Protocol
 

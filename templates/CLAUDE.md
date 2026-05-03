@@ -64,3 +64,7 @@ The checkpoint must capture:
 ## Output
 
 Be direct, useful, and specific. Prefer final work over abstract theory.
+
+## Project Feedback
+
+If you notice a way this debate-room scaffold could be improved, tell the user clearly and suggest opening an issue or pull request at `https://github.com/PrantikLamichhane/agent-debate-room`.
