@@ -10,9 +10,23 @@ if [[ -z "$agent_name" || -z "$agent_role" ]]; then
   exit 1
 fi
 
-slug="$(echo "$agent_name" | tr '[:upper:]' '[:lower:]' | tr ' ' '-')"
+slug="$(echo "$agent_name" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//')"
 upper="$(echo "$slug" | tr '[:lower:]-' '[:upper:]_')"
-title="$(echo "$agent_name" | awk '{print toupper(substr($0,1,1)) substr($0,2)}')"
+title="$(echo "$agent_name" | awk '{for (i=1; i<=NF; i++) $i=toupper(substr($i,1,1)) substr($i,2)} 1')"
+
+if [[ -z "$slug" ]]; then
+  echo "Agent name must contain at least one letter or number."
+  exit 1
+fi
+
+escape_sed() {
+  printf '%s' "$1" | sed -e 's/[\/&]/\\&/g'
+}
+
+title_escaped="$(escape_sed "$title")"
+role_escaped="$(escape_sed "$agent_role")"
+slug_escaped="$(escape_sed "$slug")"
+upper_escaped="$(escape_sed "$upper")"
 
 root=".agents/$slug"
 mkdir -p "$root/gpt" "$root/claude" "$root/shared"
@@ -21,10 +35,10 @@ render() {
   local src="$1"
   local dest="$2"
   sed \
-    -e "s/{{AGENT_NAME}}/$title/g" \
-    -e "s/{{AGENT_ROLE}}/$agent_role/g" \
-    -e "s/{{AGENT_SLUG}}/$slug/g" \
-    -e "s/{{AGENT_UPPER}}/$upper/g" \
+    -e "s/{{AGENT_NAME}}/$title_escaped/g" \
+    -e "s/{{AGENT_ROLE}}/$role_escaped/g" \
+    -e "s/{{AGENT_SLUG}}/$slug_escaped/g" \
+    -e "s/{{AGENT_UPPER}}/$upper_escaped/g" \
     "$src" > "$dest"
 }
 

@@ -146,6 +146,16 @@ Then wire your launchers or commands so:
 
 If you already have an agent folder, copy the relevant sections from the templates instead of running the script.
 
+## Test It
+
+Run:
+
+```bash
+./scripts/test.sh
+```
+
+The test creates a temporary agent, verifies the generated files, checks that template placeholders were replaced, and confirms validation errors work.
+
 ## Debate Protocol
 
 For material non-urgent work:
